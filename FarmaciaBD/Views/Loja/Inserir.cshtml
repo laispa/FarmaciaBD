@@ -1,0 +1,22 @@
+﻿@model FarmaciaBD.Models.Loja 
+@{
+    Layout = "_Layout";
+}
+
+
+<form method="post">
+    <input type="hidden" name="id" value="@Model.Numero" />
+    <!--Quando se tira o action vai para a propria página -->
+    <div class="mb-3">
+        <label for="cidade" class="form-label">Cidade</label>
+        <input type="text" name="cidade" class="form-control" value="@Model.Cidade" id="cidade" >
+        @Html.ValidationMessage("cidade")
+    </div>
+    <div class="mb-3">
+        <label for="endereco" class="form-label">Endereco</label>
+        <input type="text" name="endereco" class="form-control" value="@Model.Endereco" id="endereco">
+        @Html.ValidationMessage("endereco")
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+<!--TODO - retorno da pagina após o cadastro -->

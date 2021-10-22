@@ -1,27 +1,5 @@
-﻿@model List<FarmaciaBD.Models.Loja> 
- @{
-        Layout = "_Layout";
- }
+﻿@{
+    Layout = "_Layout";
+}
 
-    <h2>Lojas</h2>
-
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Numero</th>
-                <th>Cidade</th>
-                <th>Endereço </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.Numero</td>
-                    <td>@item.Cidade</td>
-                    <td>@item.Endereco</td>
-                </tr>
-
-            }
-        </tbody>
-    </table>
+<h5>HOME</h5>

@@ -1,0 +1,32 @@
+﻿@model List<FarmaciaBD.Models.Loja>
+@{
+    Layout = "_Layout";
+}
+
+<h2>Lojas</h2>
+<a href="/loja/inserir" class="btn btn-primary"> Cadastre nova loja </a>
+<!---->
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Numero</th>
+            <th>Cidade</th>
+            <th>Endereço </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Numero</td>
+                <td>@item.Cidade</td>
+                <td>@item.Endereco</td>
+                @*<td>
+                    <a href="/palavra/atualizar/@palavra.Id" class="btn">Editar</a>
+                    <a href="/palavra/excluir/@palavra.Id" class="btn">Excluir</a>
+                </td>*@
+            </tr>
+
+        }
+    </tbody>
+</table>
