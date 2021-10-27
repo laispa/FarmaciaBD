@@ -1,0 +1,67 @@
+﻿@model FarmaciaBD.Models.Funcionario
+@{
+    Layout = "_Layout";
+}
+@if (TempData["Exception"] != null) // para evitar mensagem de erro atoa
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["Exception"]
+    </div>
+}
+<br /> <br />
+<h2 style="text-align: center">Cadastrar Novo Funcionário</h2>
+<form method="post">
+    <input type="hidden" name="matricula" value="@Model.Matricula" />
+    <div class="row g-3">
+        <div class="col-12">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" name="nome" class="form-control" value="@Model.Nome" id="nome">
+            <a style="color:red">
+                @Html.ValidationMessage("nome")
+            </a>
+        </div>
+        <div class="col-md-6">
+            <label for="nascimento" class="form-label">Data de Nascimento</label>
+            <input type="text" name="nascimento" class="form-control" value="@Model.Nascimento" id="nascimento">
+
+            <a style="color:red">
+                @Html.ValidationMessage("nascimento")
+            </a>
+        </div>
+        <div class="col-md-6">
+            <label for="cargo" class="form-label">Cargo</label>
+            <input type="text" name="cargo" class="form-control" value="@Model.Cargo" id="cargo">
+
+            <a style="color:red">
+                @Html.ValidationMessage("cargo")
+            </a>
+        </div>
+        <div class="col-md-4">
+            <label for="sexo" class="form-label">Sexo</label>
+            <input type="text" name="sexo" class="form-control" value="@Model.Sexo" id="sexo">
+
+            <a style="color:red">
+                @Html.ValidationMessage("sexo")
+            </a>
+        </div>
+        <div class="col-md-4">
+            <label for="salario" class="form-label">Salário</label>
+            <input type="text" name="salario" class="form-control" value="@Model.Salario" id="salario">
+
+            <a style="color:red">
+                @Html.ValidationMessage("salario")
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <label for="loja_numero" class="form-label">Número da loja em que trabalha</label>
+            <input type="text" name="loja_numero" class="form-control" value="@Model.Loja_numero" id="loja_numero">
+            <a style="color:red">
+                @Html.ValidationMessage("loja_numero")
+            </a>
+        </div>
+
+    </div>
+    <button type="submit" class="btn btn-secondary">Salvar</button>
+</form>
+<!--TODO - retorno da pagina após o cadastro -->

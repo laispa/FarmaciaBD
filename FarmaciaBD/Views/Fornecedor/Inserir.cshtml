@@ -1,0 +1,44 @@
+﻿@model FarmaciaBD.Models.Fornecedor
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Fornecedor";
+}
+@if (TempData["Exception"] != null) // para evitar mensagem de erro atoa
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["Exception"]
+    </div>
+}
+<br /> <br />
+<h2 style="text-align: center">Cadastrar Novo Fornecedor</h2>
+<form method="post">
+    <input type="hidden" name="matricula" value="@Model.Matricula" />
+    <div class="row g-3">
+        <div class="col-12">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" name="nome" class="form-control" value="@Model.Nome" id="nome">
+
+            <a style="color:red">
+                @Html.ValidationMessage("nome")
+            </a>
+        </div>
+        <div class="col-12">
+            <label for="localizacao" class="form-label">Localização</label>
+            <input type="text" name="localizacao" class="form-control" value="@Model.Localizacao" id="localizacao">
+            <a style="color:red">
+                @Html.ValidationMessage("localizacao")
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <label for="lote" class="form-label">Lote</label>
+            <input type="text" name="lote" class="form-control" value="@Model.Lote" id="lote">
+
+            <a style="color:red">
+                @Html.ValidationMessage("lote")
+            </a>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-secondary">Salvar</button>
+</form>
+<!--TODO - retorno da pagina após o cadastro -->

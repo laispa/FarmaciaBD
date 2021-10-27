@@ -1,0 +1,27 @@
+﻿@model List<FarmaciaBD.Models.Preco>
+@{ Layout = "_Layout";
+    ViewBag.Title = "Preços";
+}
+
+<br /> <br />
+<h2 style="text-align: center">Tabela de preços dos precos</h2>
+
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Medicamento</th>
+            <th scope="col">Valor</th>
+            </tr>
+    </thead>
+    <tbody>
+        @foreach (var preco in Model)
+        {
+            <tr>
+                @*<th scope="row">@preco.Codigo</th>*@
+                <td>@preco.Nome</td>
+                <td>@preco.Valor</td>
+              
+            </tr>
+        }
+    </tbody>
+</table>

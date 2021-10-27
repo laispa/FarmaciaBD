@@ -1,0 +1,55 @@
+﻿@model List<FarmaciaBD.Models.Fornecedor>
+@{ Layout = "_Layout";
+    ViewBag.Title = "Fornecedor";
+}
+@if (TempData["Mensagem"] != null) // para evitar mensagem de erro atoa
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Mensagem"]
+    </div>
+}
+<br /><br />
+<h1 style="text-align: center">Fornecedores</h1>
+
+@*<a>@Html.ActionLink("Cadastrar novo funcionário", "Inserir", "Funcionario")</a>*@
+<a href="/fornecedor/inserir" class="btn btn-secondary" > Cadastrar novo fornecedor </a>
+<!---->
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Matricula</th>
+            <th scope="col">Nome </th>
+            <th scope="col">Localização</th>
+            <th scope="col">Lote </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var fornecedor in Model)
+        {
+        <tr>
+            <th scope="row">@fornecedor.Matricula</th>
+            <td>@fornecedor.Nome</td>
+            <td>@fornecedor.Localizacao</td>
+            <td>@fornecedor.Lote</td>
+
+            <td style="width:80px">
+                <i>
+                    @Html.ActionLink("", "Deletar", new { Numero = fornecedor.Matricula }, new
+                    {
+               @class = "bi bi-x-lg",
+                        style = "color:red; font-size:x-large"
+                    })
+                </i>
+
+                <i>
+                    @Html.ActionLink("", "Update", new { Numero = fornecedor.Matricula }, new
+                    {
+              @class = "bi bi-pen",
+                        style = "color:green; font-size:x-large"
+                    })
+                </i>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

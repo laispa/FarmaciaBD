@@ -1,0 +1,60 @@
+﻿@model List<FarmaciaBD.Models.Funcionario>
+@{ Layout = "_Layout";
+    ViewBag.Title = "Funcionário";
+}
+@if (TempData["Mensagem"] != null) // para evitar mensagem de erro atoa
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Mensagem"]
+    </div>
+}
+<br /> <br />
+<h2 style="text-align: center">Funcionários</h2>
+@*<a>@Html.ActionLink("Cadastrar novo funcionário", "Inserir", "Funcionario")</a>*@
+<a href="/funcionario/inserir" class="btn btn-secondary"> Cadastrar novo funcionário </a>
+<!---->
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Matricula</th>
+            <th scope="col">Data de Nascimento</th>
+            <th scope="col">Nome </th>
+            <th scope="col">Cargo</th>
+            <th scope="col">Sexo</th>
+            <th scope="col">Salario </th>
+            <th scope="col">Trabalha na loja nº </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var funcionario in Model)
+        {
+            <tr>
+                <th scope="row">@funcionario.Matricula</th>
+                <td>@funcionario.Nascimento</td>
+                <td>@funcionario.Nome</td>
+                <td>@funcionario.Cargo</td>
+                <td>@funcionario.Sexo</td>
+                <td> @funcionario.Salario</td>
+                <td> @funcionario.Loja_numero</td>
+
+                <td style="width:80px">
+                    <i>
+                        @Html.ActionLink("", "Deletar", new { Numero = funcionario.Matricula }, new
+                        {
+                   @class = "bi bi-x-lg",
+                            style = "color:red; font-size:x-large"
+                        })
+                    </i>
+
+                    <i>
+                        @Html.ActionLink("", "Update", new { Numero = funcionario.Matricula }, new
+                        {
+                  @class = "bi bi-pen",
+                            style = "color:green; font-size:x-large"
+                        })
+                    </i>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,32 +1,40 @@
 ﻿@model List<FarmaciaBD.Models.Loja>
-@{
-    Layout = "_Layout";
+@{ Layout = "_Layout";
+   ViewBag.Title = "Loja";
 }
-
-<h2>Lojas</h2>
-<a href="/loja/inserir" class="btn btn-primary"> Cadastre nova loja </a>
+@if (TempData["Mensagem"] != null) // para evitar mensagem de erro atoa
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Mensagem"]
+    </div>
+}
+<br /> <br />
+<h2 style="text-align: center" >Lojas</h2>
+<a href="/loja/inserir" class="btn btn-secondary"> Cadastre nova loja </a>
 <!---->
 <table class="table table-bordered">
-    <thead>
+    <thead class="thead-dark">
         <tr>
-            <th>Numero</th>
-            <th>Cidade</th>
-            <th>Endereço </th>
+            <th scope="col">Numero</th>
+            <th scope="col">Cidade</th>
+            <th scope="col">Endereço </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var loja in Model)
         {
-            <tr>
-                <td>@item.Numero</td>
-                <td>@item.Cidade</td>
-                <td>@item.Endereco</td>
-                @*<td>
-                    <a href="/palavra/atualizar/@palavra.Id" class="btn">Editar</a>
-                    <a href="/palavra/excluir/@palavra.Id" class="btn">Excluir</a>
-                </td>*@
-            </tr>
-
+        <tr>
+            <th scope="row">@loja.Numero</th>
+            <td>@loja.Cidade</td>
+            <td>@loja.Endereco</td>
+            <td style="width:80px">
+                <i>@Html.ActionLink("", "Deletar", new { Numero = loja.Numero }, new {
+                  @class = "bi bi-x-lg", style = "color:red; font-size:x-large" })</i>
+                 
+                 <i>@Html.ActionLink("", "Update", new { Numero = loja.Numero }, new{
+                  @class = "bi bi-pen", style = "color:green; font-size:x-large"}) </i>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

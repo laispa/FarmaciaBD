@@ -1,0 +1,47 @@
+﻿@model List<FarmaciaBD.Models.Produto>
+@{ Layout = "_Layout";
+    ViewBag.Title = "Funcionário";
+}
+@if (TempData["Exception"] != null) // para evitar mensagem de erro atoa
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["Exception"]
+    </div>
+}
+<br /> <br />
+<h2 style="text-align: center">Atualizando Produto</h2>
+@foreach (var produto in Model)
+{
+    <p>Código do produto: @produto.Codigo_de_Barras</p>
+
+    <form method="post">
+        <input type="hidden" name="matricula" value="@produto.Codigo_de_Barras" />
+        <div class="row g-3">
+            <div class="col-12">
+                <label for="estoque" class="form-label">Estoque</label>
+                <input type="text" name="estoque" class="form-control" value="@produto.Estoque" id="estoque">
+                <a style="color:red">
+                    @Html.ValidationMessage("estoque")
+                </a>
+            </div>
+            <div class="col-md-6">
+                <label for="valor" class="form-label">Valor $</label>
+                <input type="text" name="valor" class="form-control" value="@produto.Valor" id="valor">
+
+                <a style="color:red">
+                    @Html.ValidationMessage("valor")
+                </a>
+            </div>
+            <div class="col-md-6">
+                <label for="fornecedor_matricula" class="form-label">Matrícula do fornecedor do produto</label>
+                <input type="text" name="fornecedor_matricula" class="form-control" value="@produto.Fornecedor_Matricula" id="fornecedor_matricula">
+
+                <a style="color:red">
+                    @Html.ValidationMessage("fornecedor_matricula")
+                </a>
+            </div>
+
+        </div>
+        <button type="submit" class="btn btn-secondary">Salvar</button>
+    </form>
+}

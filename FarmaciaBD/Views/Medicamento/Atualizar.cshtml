@@ -1,0 +1,71 @@
+﻿@model List<FarmaciaBD.Models.Medicamento>
+@{ Layout = "_Layout";
+    ViewBag.Title = "Funcionário";
+}
+@if (TempData["Exception"] != null) // para evitar mensagem de erro atoa
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["Exception"]
+    </div>
+}
+<br /> <br />
+<h2 style="text-align: center">Atualizando Medicamento</h2>
+@foreach (var medicamento in Model)
+{
+    <p>Código do Medicamento: @medicamento.Codigo</p>
+
+    <form method="post">
+        <input type="hidden" name="codigo" value="@medicamento.Codigo" />
+        <div class="row g-3">
+            <div class="col-12">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" name="nome" class="form-control" value="@medicamento.Nome" id="nome">
+                <a style="color:red">
+                    @Html.ValidationMessage("nome")
+                </a>
+            </div>
+            <div class="col-md-6">
+                <label for="laboratorio" class="form-label">Laboratório</label>
+                <input type="text" name="laboratorio" class="form-control" value="@medicamento.Laboratorio" id="laboratorio">
+
+                <a style="color:red">
+                    @Html.ValidationMessage("laboratorio")
+                </a>
+            </div>
+            <div class="col-md-6">
+                <label for="composicao" class="form-label">Composição</label>
+                <input type="text" name="composicao" class="form-control" value="@medicamento.Composicao" id="composicao">
+
+                <a style="color:red">
+                    @Html.ValidationMessage("composicao")
+                </a>
+            </div>
+            <div class="col-md-4">
+                <label for="tarja" class="form-label">Tarja</label>
+                <input type="text" name="tarja" class="form-control" value="@medicamento.Tarja" id="tarja">
+
+                <a style="color:red">
+                    @Html.ValidationMessage("tarja")
+                </a>
+            </div>
+            <div class="col-md-4">
+                <label for="tipo" class="form-label">Tipo</label>
+                <input type="text" name="tipo" class="form-control" value="@medicamento.Tipo" id="tipo">
+
+                <a style="color:red">
+                    @Html.ValidationMessage("tipo")
+                </a>
+            </div>
+
+            <div class="col-md-4">
+                <label for="produto_codigo_de_barras" class="form-label">Código do Produto</label>
+                <input type="text" name="produto_codigo_de_barras" class="form-control" value="@medicamento.Produto_codigo_de_barras" id="produto_codigo_de_barras">
+                <a style="color:red">
+                    @Html.ValidationMessage("produto_codigo_de_barras")
+                </a>
+            </div>
+
+        </div>
+        <button type="submit" class="btn btn-secondary">Salvar</button>
+    </form>
+}

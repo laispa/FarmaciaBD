@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace FarmaciaBD.Models
 {
-    public class Loja
+    public class Preco
     {
-        public int Numero { get; set; }
         [Required(ErrorMessage = "Campo obrigatório")]
-        public string Cidade { get; set; }
-        [Required(ErrorMessage = "Campo obrigatório")]
-        public string Endereco { get; set; }
-    }
+        public string Nome { get; set; }
 
+        [Required(ErrorMessage = "Campo obrigatório")]
+        public float Valor { get; set; }
+        
+    }
 }

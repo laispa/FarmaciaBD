@@ -28,7 +28,7 @@ namespace FarmaciaBD
             }
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
-
+            app.UseHttpsRedirection();
         }
     }
 }

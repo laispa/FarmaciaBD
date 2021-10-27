@@ -1,0 +1,54 @@
+﻿@model List<FarmaciaBD.Models.Produto>
+@{ Layout = "_Layout";
+    ViewBag.Title = "Funcionário";
+}
+@if (TempData["Mensagem"] != null) // para evitar mensagem de erro atoa
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Mensagem"]
+    </div>
+}
+<br /> <br />
+<h2 style="text-align: center">Produtos</h2>
+
+<a href="/produto/inserir" class="btn btn-secondary"> Cadastrar novos Produtos </a>
+<a href="/medicamento/index" class="btn btn-secondary"> Visualisar medicamentos</a>
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Código de Barras</th>
+            <th scope="col">Nº de Estoque</th>
+            <th scope="col">Valor do Produto </th>
+            <th scope="col">Matrícula do Fornecedor</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var produto in Model)
+        {
+            <tr>
+                <th scope="row">@produto.Codigo_de_Barras</th>
+                <td>@produto.Estoque</td>
+                <td>@produto.Valor</td>
+                <td>@produto.Fornecedor_Matricula</td>
+
+                <td style="width:80px">
+                    <i>
+                        @Html.ActionLink("", "Deletar", new { Numero = produto.Codigo_de_Barras }, new
+                        {
+                   @class = "bi bi-x-lg",
+                            style = "color:red; font-size:x-large"
+                        })
+                    </i>
+
+                    <i>
+                        @Html.ActionLink("", "Update", new { Numero = produto.Codigo_de_Barras }, new
+                        {
+                  @class = "bi bi-pen",
+                            style = "color:green; font-size:x-large"
+                        })
+                    </i>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

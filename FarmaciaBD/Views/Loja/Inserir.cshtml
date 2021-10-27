@@ -1,22 +1,27 @@
-﻿@model FarmaciaBD.Models.Loja 
+﻿@model FarmaciaBD.Models.Loja
 @{
     Layout = "_Layout";
+    ViewBag.Title = "Loja";
 }
-
-
+<br /><br />
+<h2 style="text-align: center">Cadastrar Loja</h2>
 <form method="post">
-    <input type="hidden" name="id" value="@Model.Numero" />
+    <input type="hidden" name="numero" value="@Model.Numero" />
     <!--Quando se tira o action vai para a propria página -->
     <div class="mb-3">
         <label for="cidade" class="form-label">Cidade</label>
         <input type="text" name="cidade" class="form-control" value="@Model.Cidade" id="cidade" >
-        @Html.ValidationMessage("cidade")
+        <a style="color:red">
+            @Html.ValidationMessage("cidade")
+        </a>
     </div>
     <div class="mb-3">
         <label for="endereco" class="form-label">Endereco</label>
         <input type="text" name="endereco" class="form-control" value="@Model.Endereco" id="endereco">
-        @Html.ValidationMessage("endereco")
+        <a style="color:red">
+            @Html.ValidationMessage("endereco")
+        </a>
     </div>
-    <button type="submit" class="btn btn-primary">Salvar</button>
+    <button type="submit" class="btn btn-secondary">Salvar</button>
 </form>
 <!--TODO - retorno da pagina após o cadastro -->
