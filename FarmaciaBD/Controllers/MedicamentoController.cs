@@ -135,28 +135,29 @@ namespace FarmaciaBD.Controllers
         [HttpPost]
         public IActionResult Update([FromForm] Medicamento medicamento)
         {
-            if (ModelState.IsValid)
+            try
             {
-                using (MySqlConnection conexao = new MySqlConnection("server=localhost;user=root;database=farmacia;port=3306;password=gatosloucos"))
+                if (ModelState.IsValid)
                 {
-                    conexao.Open();
-                    MySqlCommand comando = new MySqlCommand(
-                        "Update medicamento set laboratorio='" + medicamento.Laboratorio + "', nome='" + medicamento.Nome + "', composicao= '" + medicamento.Composicao + "', tarja='" + medicamento.Tarja + "', tipo='" + medicamento.Tipo + "',produto_codigo_de_barras='" + medicamento.Produto_codigo_de_barras + "' WHERE Codigo=" + medicamento.Codigo + "", conexao);
+                    using (MySqlConnection conexao = new MySqlConnection("server=localhost;user=root;database=farmacia;port=3306;password=gatosloucos"))
+                    {
+                        conexao.Open();
+                        MySqlCommand comando = new MySqlCommand(
+                            "Update medicamento set laboratorio='" + medicamento.Laboratorio + "', nome='" + medicamento.Nome + "', composicao= '" + medicamento.Composicao + "', tarja='" + medicamento.Tarja + "', tipo='" + medicamento.Tipo + "',produto_codigo_de_barras='" + medicamento.Produto_codigo_de_barras + "' WHERE Codigo=" + medicamento.Codigo + "", conexao);
 
-                    comando.ExecuteNonQuery();
+                        comando.ExecuteNonQuery();
 
-                    TempData["Mensagem"] = "O Medicamento " + medicamento.Codigo + " foi atualizado com sucesso!";
-                    conexao.Close();
+                        TempData["Mensagem"] = "O Medicamento " + medicamento.Codigo + " foi atualizado com sucesso!";
+                        conexao.Close();
+                    }
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
-            }
-            /*
             }
             catch (Exception)
             {
-                TempData["Exception"] = "Você digitou uma loja existente? Verifique também o formato da data";
-            }*/
-            return View("Atualizar", medicamento);
+                TempData["Exception"] = "Você digitou um produto existente? Verifique também se não já o cadastrou";
+            }
+            return RedirectToAction("Index");
         }
     }
 }

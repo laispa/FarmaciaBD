@@ -100,6 +100,7 @@ namespace FarmaciaBD.Controllers
         [HttpGet, ActionName("Update")]
         public IActionResult Update(int Numero)
         {
+
             List<Fornecedor> fornecedores = new List<Fornecedor>();
             using (MySqlConnection conexao = new MySqlConnection("server=localhost;user=root;database=farmacia;port=3306;password=gatosloucos"))
             {
@@ -114,12 +115,13 @@ namespace FarmaciaBD.Controllers
                     Fornecedor fornecedor = new Fornecedor
                     {
                         Matricula = Convert.ToInt32(reader["matricula"]),
-                        Nome = reader["nome"].ToString(),
                         Localizacao = reader["localizacao"].ToString(),
+                        Nome = reader["nome"].ToString(),
                         Lote = Convert.ToInt32(reader["lote"])
-                    };
 
+                    };
                     fornecedores.Add(fornecedor);
+
                 }
                 reader.Close();
 
@@ -130,19 +132,25 @@ namespace FarmaciaBD.Controllers
         [HttpPost]
         public IActionResult Update([FromForm] Fornecedor fornecedor)
         {
-            if (ModelState.IsValid) { 
-            
+            if (ModelState.IsValid)
+            {
+
                 using (MySqlConnection conexao = new MySqlConnection("server=localhost;user=root;database=farmacia;port=3306;password=gatosloucos"))
                 {
                     conexao.Open();
-                    MySqlCommand comando = new MySqlCommand("Update fornecedor set localizacao='" + fornecedor.Localizacao + "', nome='" + fornecedor.Nome + "', lote= " + fornecedor.Lote + " WHERE matricula=" + fornecedor.Matricula + "", conexao);
+                    MySqlCommand comando = new MySqlCommand(
+                        "Update fornecedor set localizacao='" + fornecedor.Localizacao + "', nome='" + fornecedor.Nome + "', lote= '" + fornecedor.Lote + "' WHERE matricula=" + fornecedor.Matricula + "", conexao);
+
                     comando.ExecuteNonQuery();
-                    TempData["Mensagem"] = "O fornecedor " + fornecedor.Matricula + "foi atualizado com sucesso!";
+
+                    TempData["Mensagem"] = "O fornecedor " + fornecedor.Matricula + "' foi atualizado com sucesso!";
                     conexao.Close();
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
+                
             }
-            return View("Atualizar", fornecedor);
+            TempData["Exception"] = "ERRO";
+            return View("Atualizar",fornecedor);
         }
     }
 }

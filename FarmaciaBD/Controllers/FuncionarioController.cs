@@ -136,29 +136,34 @@ namespace FarmaciaBD.Controllers
         [HttpPost]
         public IActionResult Update([FromForm] Funcionario funcionario)
         {
-            if (ModelState.IsValid)
+            try
             {
-                using (MySqlConnection conexao = new MySqlConnection("server=localhost;user=root;database=farmacia;port=3306;password=gatosloucos"))
-                {
-                    conexao.Open();
-                    MySqlCommand comando = new MySqlCommand(
-                        "Update funcionario set nascimento='" + funcionario.Nascimento + "', nome='" + funcionario.Nome + "', cargo= '" + funcionario.Cargo + "', sexo='" + funcionario.Sexo + "', salario='" + funcionario.Salario + "',loja_numero='" + funcionario.Loja_numero + "' WHERE matricula=" + funcionario.Matricula + "", conexao);
+                /*if (ModelState.IsValid)
+                {*/
+                    using (MySqlConnection conexao = new MySqlConnection("server=localhost;user=root;database=farmacia;port=3306;password=gatosloucos"))
+                    {
+                        conexao.Open();
+                        MySqlCommand comando = new MySqlCommand(
+                            "Update funcionario set nascimento='" + funcionario.Nascimento + "', nome='" + funcionario.Nome + "', cargo= '" + funcionario.Cargo + "', sexo='" + funcionario.Sexo + "', salario='" + funcionario.Salario + "',loja_numero='" + funcionario.Loja_numero + "' WHERE matricula=" + funcionario.Matricula + "", conexao);
 
-                    comando.ExecuteNonQuery();
+                        comando.ExecuteNonQuery();
 
-                    TempData["Mensagem"] = "O funcionário" + funcionario.Matricula + "' foi atualizado com sucesso!";
-                    conexao.Close();
-                }
-                return RedirectToAction("Index");
+                        TempData["Mensagem"] = "O funcionário" + funcionario.Matricula + "' foi atualizado com sucesso!";
+                        conexao.Close();
+                        return RedirectToAction("Index");
+                    }
+                
             }
-            /*
-            }
-            catch (Exception)
+            
+            catch(Exception)
             {
-                TempData["Exception"] = "Você digitou uma loja existente? Verifique também o formato da data";
-            }*/
-            return View("Atualizar", funcionario);
+                TempData["Exception"] = "ERRO. Verifique se tentou cadastrar um número de loja existente";
+                
+            }
+            
+            return RedirectToAction("Index");
         }
+         
     }
 }
 

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace FarmaciaBD.Controllers
 {
     public class ProdutoController : Controller
@@ -59,7 +60,8 @@ namespace FarmaciaBD.Controllers
                 using (MySqlConnection conexao = new MySqlConnection("server=localhost;user=root;database=farmacia;port=3306;password=gatosloucos"))
                 {
                     conexao.Open();
-                    MySqlCommand comando = new MySqlCommand("insert into produto(estoque, valor, fornecedor_matricula) values(" + produto.Estoque + "," + produto.Valor + "," + produto.Fornecedor_Matricula +");", conexao);
+                    
+                    MySqlCommand comando = new MySqlCommand("insert into produto(estoque, valor, fornecedor_matricula) values(" + produto.Estoque + "," + Convert.ToSingle(produto.Valor) + "," + produto.Fornecedor_Matricula +");", conexao);
 
                     comando.ExecuteNonQuery();
                     conexao.Close();
@@ -131,11 +133,13 @@ namespace FarmaciaBD.Controllers
         {
             if (ModelState.IsValid)
             {
+                int teste = produto.Codigo_de_Barras;
                 using (MySqlConnection conexao = new MySqlConnection("server=localhost;user=root;database=farmacia;port=3306;password=gatosloucos"))
                 {
+                    
                     conexao.Open();
                     MySqlCommand comando = new MySqlCommand(
-                        "Update produto set estoque=" + produto.Estoque + ", valor=" + produto.Valor + ", fornecedor_matricula= " + produto.Fornecedor_Matricula + "", conexao);
+                        "Update produto set estoque=" + produto.Estoque + ", valor=" + produto.Valor + ", fornecedor_matricula= " + produto.Fornecedor_Matricula + " WHERE codigo_de_barras=" + produto.Codigo_de_Barras+ "", conexao);
 
                     comando.ExecuteNonQuery();
 

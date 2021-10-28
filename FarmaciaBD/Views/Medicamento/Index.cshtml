@@ -8,7 +8,14 @@
         @TempData["Mensagem"]
     </div>
 }
-<br /> <br />
+@if (TempData["Exception"] != null) // para evitar mensagem de erro atoa
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["Exception"]
+    </div>
+}
+<br />
+<br />
 <h2 style="text-align: center">Medicamentos</h2>
 @*<a>@Html.ActionLink("Cadastrar novo funcionário", "Inserir", "Funcionario")</a>*@
 <a href="/medicamento/inserir" class="btn btn-secondary"> Cadastrar novo medicamento </a>

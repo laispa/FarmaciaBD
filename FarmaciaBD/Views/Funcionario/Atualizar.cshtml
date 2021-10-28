@@ -2,12 +2,7 @@
 @{ Layout = "_Layout";
     ViewBag.Title = "Funcionário";
 }
-@if (TempData["Exception"] != null) // para evitar mensagem de erro atoa
-{
-    <div class="alert alert-danger" role="alert">
-        @TempData["Exception"]
-    </div>
-}
+
 <br /> <br />
 <h2 style="text-align: center">Atualizando Funcionário</h2>
 @foreach (var funcionario in Model)
