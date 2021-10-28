@@ -73,7 +73,7 @@ namespace FarmaciaBD.Controllers
             }
             catch (Exception)
             {
-                TempData["Exception"] = "Você digitou um codigo de produto existente?";
+                TempData["Exception"] = "Você digitou um codigo de produto existente? Não pode existir repetição de códigos no banco.";
             }
 
             return View("Inserir", medicamento);

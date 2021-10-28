@@ -1,4 +1,4 @@
-﻿@model FarmaciaBD.Models.Medicamento
+﻿@model FarmaciaBD.Models.Produto
 @{
     Layout = "_Layout";
 }
@@ -9,58 +9,34 @@
     </div>
 }
 <br /> <br />
-<h2 style="text-align: center">Cadastrar Novo Medicamento</h2>
+<h2 style="text-align: center">Cadastrar Novo Produto</h2>
 <form method="post">
-    <input type="hidden" name="matricula" value="@Model.Codigo" />
+    <input type="hidden" name="codigo_de_Barras" value="@Model.Codigo_de_Barras" />
     <div class="row g-3">
         <div class="col-12">
-            <label for="nome" class="form-label">Nome</label>
-            <input type="text" name="nome" class="form-control" value="@Model.Nome" id="nome">
+            <label for="estoque" class="form-label">Estoque</label>
+            <input type="text" name="estoque" class="form-control" value="@Model.Estoque" id="estoque">
             <a style="color:red">
-                @Html.ValidationMessage("nome")
+                @Html.ValidationMessage("estoque")
             </a>
         </div>
         <div class="col-md-6">
-            <label for="laboratorio" class="form-label">Laboratório</label>
-            <input type="text" name="laboratorio" class="form-control" value="@Model.Laboratorio" id="laboratorio">
+            <label for="valor" class="form-label">Valor</label>
+            <input type="text" name="valor" class="form-control" value="@Model.Valor" id="valor">
 
             <a style="color:red">
-                @Html.ValidationMessage("laboratorio")
+                @Html.ValidationMessage("valor")
             </a>
         </div>
         <div class="col-md-6">
-            <label for="composicao" class="form-label">Composição</label>
-            <input type="text" name="composicao" class="form-control" value="@Model.Composicao" id="composicao">
+            <label for="fornecedor_matricula" class="form-label">Matrícula do Fornecedor</label>
+            <input type="text" name="fornecedor_matricula" class="form-control" value="@Model.Fornecedor_Matricula" id="fornecedor_matricula">
 
             <a style="color:red">
-                @Html.ValidationMessage("composicao")
+                @Html.ValidationMessage("fornecedor_matricula")
             </a>
         </div>
-        <div class="col-md-4">
-            <label for="tarja" class="form-label">Tarja</label>
-            <input type="text" name="tarja" class="form-control" value="@Model.Tarja" id="tarja">
-
-            <a style="color:red">
-                @Html.ValidationMessage("tarja")
-            </a>
-        </div>
-        <div class="col-md-4">
-            <label for="tipo" class="form-label">Tipo</label>
-            <input type="text" name="tipo" class="form-control" value="@Model.Tipo" id="tipo">
-
-            <a style="color:red">
-                @Html.ValidationMessage("tipo")
-            </a>
-        </div>
-
-        <div class="col-md-4">
-            <label for="produto_codigo_de_barras" class="form-label">Código do Produto</label>
-            <input type="text" name="produto_codigo_de_barras" class="form-control" value="@Model.Produto_codigo_de_barras" id="produto_codigo_de_barras">
-            <a style="color:red">
-                @Html.ValidationMessage("produto_codigo_de_barras")
-            </a>
-        </div>
-
+        
     </div>
     <button type="submit" class="btn btn-secondary">Salvar</button>
 </form>
