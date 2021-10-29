@@ -4,7 +4,7 @@ use Farmacia;
 -- Criando tabelas Farmácia
 -- ----------------------------
 CREATE TABLE IF NOT EXISTS `Comprador` (
-  `RG` INT NOT NULL AUTO_INCREMENT,
+  `RG` INT NOT NULL ,
   `Nome` VARCHAR(60) NOT NULL,
   `Cidade` VARCHAR(45) NOT NULL,
   `Endereço` VARCHAR(60) NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `Comprador` (
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `Emitente` (
-  `codigo` INT NOT NULL,
+  `codigo` INT NOT NULL auto_increment,
   `nome` VARCHAR(60) NOT NULL,
   `endereco` VARCHAR(60) NOT NULL,
   `cidade` VARCHAR(45) NOT NULL,
@@ -228,7 +228,7 @@ begin
     if estoque <=10 then 
     select *from fornecedor;
     end if;
-end $$
+end $$soma_estoque
 DELIMITER ;  
 
 -- -------------------------------
@@ -240,17 +240,11 @@ Imagem MEDIUMBLOB);
 show tables;
 INSERT INTO DadoBinario (codigo ,Imagem) VALUES (2,LOAD_FILE("C:\Users\laisportela\Desktop\imagem_para_banco"));
 
-
 -- -------------------------------
 -- Inserindo Dados 
 -- --------------------------------
 
-use farmacia;
-select *from loja;
-select *from funcionario;
-select *from fornecedor;
-select *from produto;
-select *from medicamento;
+
 insert into loja (cidade, endereco) values ("Samambaia Norte", "Qr 412 conj 7, lote 2");
 insert into loja (cidade, endereco) values ("Samambaia Sul", "Qr 316 conj 9, lote 40");
 insert into loja (cidade, endereco) values ("Taguatinga", "Qna30");
@@ -275,6 +269,16 @@ insert into Produto ( estoque, valor, Fornecedor_Matricula) values (500 , 9.99, 
 insert into Produto ( estoque, valor, Fornecedor_Matricula) values (300 , 40, 1);
 insert into Produto ( estoque, valor, Fornecedor_Matricula) values (10 , 88, 3);
 insert into Produto ( estoque, valor, Fornecedor_Matricula) values (34 , 22.5, 5);
+insert into Produto ( estoque, valor, Fornecedor_Matricula) values (34 , 20, 3);
+insert into Produto ( estoque, valor, Fornecedor_Matricula) values (34 , 20, 3);
+insert into Produto ( estoque, valor, Fornecedor_Matricula) values (45 , 20, 3);
+insert into Produto ( estoque, valor, Fornecedor_Matricula) values (65 , 20, 3);
+insert into Produto ( estoque, valor, Fornecedor_Matricula) values (34 , 20, 3);
+insert into Produto ( estoque, valor, Fornecedor_Matricula) values (60 , 90, 3);
+insert into Produto ( estoque, valor, Fornecedor_Matricula) values (60 , 98, 3);
+insert into Produto ( estoque, valor, Fornecedor_Matricula) values (60 , 80, 3);
+insert into Produto ( estoque, valor, Fornecedor_Matricula) values (60 , 5, 3);
+insert into Produto ( estoque, valor, Fornecedor_Matricula) values (60 , 1, 3);
 
 insert into Medicamento ( laboratorio, nome, composicao, tarja, tipo, produto_codigo_de_barras) values ("Eurofarma", "Carbolitium", "Carbonato de Lítio", "Vermelha", "Ansiolítico",1 );
 insert into Medicamento ( laboratorio, nome, composicao, tarja, tipo, produto_codigo_de_barras) values ("Eurofarma", "Venlafaxin", "Cloridrato de Venlafaxina", "Vermelha", "Ansiolítico",2 );
@@ -282,3 +286,81 @@ insert into Medicamento ( laboratorio, nome, composicao, tarja, tipo, produto_co
 insert into Medicamento ( laboratorio, nome, composicao, tarja, tipo, produto_codigo_de_barras) values ("Eurofarma", "Rivotril", "Rivotril", "Preta", "Ansiolítico",4 );
 insert into Medicamento ( laboratorio, nome, composicao, tarja, tipo, produto_codigo_de_barras) values ("Eurofarma", "Dorflex", "Diporona", "Sem Tarja", "Analgésico",5 );
 
+-- ---------------------------------------
+-- Adição outras tabelas
+-- ---------------------------------------
+
+insert into fornecedor_has_loja values(1,1);
+insert into fornecedor_has_loja values(2,2);
+insert into fornecedor_has_loja values(3,3);
+insert into fornecedor_has_loja values(4,4);
+insert into fornecedor_has_loja values(5,5);
+
+
+insert into cosmetico (descricao, nome, marca, tipo, produto_codigo_de_barras) values("Shampoo", "Shampoo Cabelos Lisos", "Skala", "cabelo", 6);
+insert into cosmetico (descricao, nome, marca, tipo, produto_codigo_de_barras) values("Condicionador", "Condicionador Cabelos Lisos", "Skala", "cabelo", 7);
+insert into cosmetico (descricao, nome, marca, tipo, produto_codigo_de_barras) values("Creme de pentear ", "Creme de Pentear Cabelos Lisos", "Skala", "cabelo", 8);
+insert into cosmetico (descricao, nome, marca, tipo, produto_codigo_de_barras) values("Mascara hidratante", "Mascara Cabelos Lisos", "Skala", "cabelo", 9);
+insert into cosmetico (descricao, nome, marca, tipo, produto_codigo_de_barras) values("Desodorante", "Invisible ", "Nivea", "desodorante", 10);
+
+insert into CuidadoPessoal (nome, marca, tipo, descricao, produto_codigo_de_barras) values("Papel higiênico", "Neve", "Higiene", "16 rolos",11 );
+insert into CuidadoPessoal (nome, marca, tipo, descricao, produto_codigo_de_barras) values("BIO-OIL", "Bio-oil", "Pele", "Oléo anti-estrias - caixa",12);
+insert into CuidadoPessoal (nome, marca, tipo, descricao, produto_codigo_de_barras) values("Protetor solar VICKY", "VICKY", "Pele", "Falor 60",13);
+insert into CuidadoPessoal (nome, marca, tipo, descricao, produto_codigo_de_barras) values("Protetor solar" , "Nivea", "Pele", "Falor 60",14);
+insert into CuidadoPessoal (nome, marca, tipo, descricao, produto_codigo_de_barras) values("Lixa" , "Nivea", "Unha", "Lixa de unha amarela",15);
+
+insert into Comprador ( rg, nome, cidade, endereço, UF, orgaoemissor) values("37895381" , "Lais", "Samambaia", "Qr 204", "DF","SSP");
+insert into Comprador ( rg, nome, cidade, endereço, UF, orgaoemissor) values("37895382" , "Luis", "Taguatinga", "Qn2", "DF","SSP");
+insert into Comprador ( rg, nome, cidade, endereço, UF, orgaoemissor) values("37895383" , "Lucas", "Ceilandia", "Qn30", "DF","SSP");
+insert into Comprador ( rg, nome, cidade, endereço, UF, orgaoemissor) values("37895384" , "Pedro", "Samambaia", "Qr 512", "DF","SSP");
+insert into Comprador ( rg, nome, cidade, endereço, UF, orgaoemissor) values("37895385" , "João", "Ceilandia", "Qn30", "DF","SSP");
+
+insert into Emitente ( nome, cidade, endereco, telefone) values( "Clinica Inova", "Ceilandia", "Qna30", "61992256142");
+insert into Emitente ( nome, cidade, endereco, telefone) values( "Amor Saude", "Ceilandia", "Qna 30", "61992256143");
+insert into Emitente ( nome, cidade, endereco, telefone) values( "Clinica Saude", "Samambaia", "Qr 412", "61992256144");
+insert into Emitente ( nome, cidade, endereco, telefone) values( "Clinica Amparo", "Taguatinga", "Cnb2", "61992256145");
+insert into Emitente ( nome, cidade, endereco, telefone) values( "Clinica Familia", "Samambaia", "Qr 316 ", "6199225614");
+
+insert into ReceitaMedica ( tipo, crm, prescricao, emitente_codigo, comprador_rg) values("azul" , "1232", "Tomar a cada 12 hrs ", "1",37895381);
+insert into ReceitaMedica ( tipo, crm, prescricao, emitente_codigo, comprador_rg) values("amarela" , "1234", "Tomar a cada 8hrs ", "1",37895382);
+insert into ReceitaMedica ( tipo, crm, prescricao, emitente_codigo, comprador_rg) values("azul" , "1235", "Tomar todos os dias de manha ", "2",37895383);
+insert into ReceitaMedica ( tipo, crm, prescricao, emitente_codigo, comprador_rg) values("azul" , "1236", "Tomar a cada 16 hrs ", "3",37895384);
+insert into ReceitaMedica ( tipo, crm, prescricao, emitente_codigo, comprador_rg) values("branca" , "1237", "Tomar a cada 6 hrs por 3 diad ", "1",37895385);
+
+insert into medicamento_has_receitamedica ( medicamento_codigo, receitamedica_data) values(1, 1);
+insert into medicamento_has_receitamedica ( medicamento_codigo, receitamedica_data) values(2, 2);
+insert into medicamento_has_receitamedica ( medicamento_codigo, receitamedica_data) values(3, 3);
+insert into medicamento_has_receitamedica ( medicamento_codigo, receitamedica_data) values(4, 4);
+insert into medicamento_has_receitamedica ( medicamento_codigo, receitamedica_data) values(5, 5);
+
+insert into ClienteCadastrado ( cpf, notafiscal) values(074247142, 554);
+insert into ClienteCadastrado ( cpf, notafiscal) values(074247145, 556);
+insert into ClienteCadastrado ( cpf, notafiscal) values(074247212, 557);
+insert into ClienteCadastrado ( cpf, notafiscal) values(07424772, 559);
+insert into ClienteCadastrado ( cpf, notafiscal) values(074247212, 560);
+
+insert into produto_has_ClienteCadastrado ( produto_codigo_de_barras, clientecadastrado_CPF) values(1, 074247145);
+insert into produto_has_ClienteCadastrado ( produto_codigo_de_barras, clientecadastrado_CPF) values(5, 074247142);
+insert into produto_has_ClienteCadastrado ( produto_codigo_de_barras, clientecadastrado_CPF) values(6, 074247212);
+insert into produto_has_ClienteCadastrado ( produto_codigo_de_barras, clientecadastrado_CPF) values(4, 07424772);
+insert into produto_has_ClienteCadastrado ( produto_codigo_de_barras, clientecadastrado_CPF) values(2, 074247212);
+
+-- -----------------
+-- Select
+-- -----------------
+
+use farmacia;
+select *from loja;
+select *from funcionario;
+select *from fornecedor;
+select *from produto;
+select *from medicamento;
+select *from fornecedor_has_loja;
+select *from cosmetico;
+select *from CuidadoPessoal;
+select *from Comprador;
+select *from Emitente;
+select *from ReceitaMedica;
+select *from medicamento_has_receitamedica;
+select *from ClienteCadastrado;
+select *from produto_has_ClienteCadastrado;
